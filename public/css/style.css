@@ -1,6 +1,66 @@
-p {font-size: 13px;}
-.mainRow {background-color: #e9ecef; margin:0; padding: 20px;}
-.row {margin-top: 20px; margin-bottom: 10px;}
-.jumbotron {margin:0; opacity: 0.4; background: url("../images/bookbkgd1.jpg"); height: 100%; width: 100%; background-size: cover; z-index:1}
-form {margin-top: 20px; padding: 15px; border: solid; border-radius: 5px;border-color:lightgray; border-width: 1px;}
-#header-img {background: none; float: right; padding: 0; margin: -30px;}
+p {
+    font-size: 13px;
+}
+
+.mainRow {
+    background-color: #e9ecef;
+    margin: 0;
+    padding: 20px;
+}
+
+.row {
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+.jumbotron {
+    margin: 0;
+    opacity: 0.4;
+    background: url("../images/bookbkgd1.jpg");
+    height: 100%;
+    width: 100%;
+    background-size: cover;
+    z-index: 1
+}
+
+form {
+    margin-top: 20px;
+    padding: 15px;
+    border: solid;
+    border-radius: 5px;
+    border-color: lightgray;
+    border-width: 1px;
+}
+
+#header-img {
+    background: none;
+    float: right;
+    padding: 0;
+    margin: -30px;
+}
+
+.reviewCard {
+    overflow: hidden;
+   /* white-space: nowrap; */
+   text-overflow: ellipsis;
+   height: 465px;
+   margin-bottom: 20px;
+}
+
+
+#commentsHolder {
+    margin-top: 20px;
+    padding: 15px;
+    border: solid;
+    border-radius: 5px;
+    border-color: lightgray;
+    border-width: 1px;
+}
+.commentCard {
+    
+    max-height: 145px;
+    padding: 10px;
+    margin-bottom: 10px;
+    /* height: 630px;
+    width: 368px; */
+}
