@@ -10,8 +10,10 @@
                         <div class="card-body">
                             <h6 class="card-title">{{book_title}} by {{author}} </h6>
                             <p class="card-text">{{blurb}}</p>
-                                <a href="{{review_url}}" class="card-link">Read review</a>
-                                <a href="#" class="card-link">Add comment</a>
+                                <a href="{{review_url}}" class="btn btn-success btn-sm" target="_blank"
+                                >Read review</a>
+                                {{!-- <a href="#" class="card-link">Add comment</a> --}}
+                                <button type="button" data-id = "{{_id}}" class="btn btn-success btn-sm add-comment">Add comment</button>
                             
                         </div>
                     </div>
@@ -21,7 +23,8 @@
         </div>
 
         <div class="col-3 rightCol">
-            <form>
+            <div id = "bookName"></div>
+            <form id= "comment-form" class = "hidden">
                 <div class="form-group">
                     <label for="commenter">Name</label>
                     <input type="text" class="form-control" id="commenter" placeholder="What should we call you?">
@@ -36,10 +39,18 @@
             </form>
 
             <div id ="commentsHolder">
-                {{!-- <div class = "card commentCard">
-                    <div class="card-header">Comment 1</div>
-                    <div class="card-body"><p>This is where the body of a comment will go.</p></div> --}}
+              
+	        	{{#each comment}}
+               
+                <div class = "card commentCard">
+                    <div class='card-header'>{{commenter}}</div>
+                        <div class="card-body">
+                            <p>{{body}}</p>
+                            <button data-id = "{{_id}}" type="submit" class="btn btn-danger btn-sm delete-comment">Delete</button>
+                    </div>
                 </div>
+                {{/each}}
+            </div>
 
                 {{!-- <div class = "card commentCard">
                     <div class="card-header">Comment 2</div>

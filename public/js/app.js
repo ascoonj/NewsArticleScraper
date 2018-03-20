@@ -2,43 +2,67 @@
 // and to view recent comments related to a particular/selected review
 
 //When the user clicks a review
-$(".reviewHolder").on("click", ".reviewCard", function(event){
-    const reviewId = this.attr("data-id");
-    
-    // clear the comments div of current comments
+$(".reviewHolder").on("click", ".add-comment", function(event){
+    const reviewId = $(this).attr("data-id");
+    console.log("an 'add comment' button was clicked");
+    console.log(reviewId);
+
+    $("#comment-form").removeClass("hidden");
     
     $("#commentsHolder").empty();
 
-    //pass the reviewId to the data-id attribute of the save-comment button
-    $("#save-comment").attr("data-id", reviewId);
+   $("#save-comment").attr("data-id", reviewId);
+   console.log("comment button "+ $("#save-comment").attr("data-id"));
 
-    // and get comments corresponding to the clicked review
+    //and get comments corresponding to the clicked review
     $.get("/reviews/" + reviewId, function(results, err){
-        var comments = results.comments;
-        console.log(comments);
+        console.log(results);
+        var name = results.book_title;
+        $("#bookName").text(name);
+        var comment = results.comment;
+        console.log(comment);
+        comment.forEach(function(element){
+            let html = "<div class = 'card commentCard'>";
+            html += "<div class='card-header'>";
+            html += element.commenter;
+            html += "</div><div class='card-body'><p>";
+            html += element.body;
+            html += "</p>";
+            html += "<button data-id =" + element._id;
+            html += "type='submit' class='btn btn-danger btn-sm delete-comment'>";
+            html += "Delete</button></div></div>";
+
+            $("#commentsHolder").prepend(html);
+        });
             
     });
 
 });
 
-$("save-comment").on("click", function(event){
+
+$("#save-comment").on("click", function(event){
     event.preventDefault();
-    const newComment = {};
+    var newComment = {};
     newComment.commenter = $("#commenter").val().trim();
-    newComment.body = $("#comment-body").val().trim();
+    newComment.body = $("#comment-body").val();
     newComment.review = $(this).attr("data-id");
+    console.log("comment being added: ", newComment);
 
     $.post("/comment", newComment, function(results){
         console.log(results);
         console.log("successfully added comment to database");
 
         let html = "<div class = 'card commentCard'>";
-        html += "<div class='card-header'>newComment.commenter</div>";
-        html += "<div class='card-body'><p>";
+        html += "<div class='card-header'>";
+        html += newComment.commenter;
+        html += "</div><div class='card-body'><p>";
         html += newComment.body;
-        html += "</p></div></div>";
+        html += "</p>";
+        html += "<button type='submit' class='btn btn-danger btn-sm delete-comment'>";
+        html += "Delete</button></div></div>";
 
         $("#commentsHolder").prepend(html);
+        // $("#commentsHolder").removeClass("hidden");
     });
 
     $("#commenter").val("");

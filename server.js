@@ -29,6 +29,8 @@ app.use(express.static("public"));
 
 
 //Routes
+require("./scripts/scrape.js")(app);
+require("./routes/htmlRoutes.js")(app);
 
 // Set up promises with mongoose
 mongoose.Promise = global.Promise;
@@ -48,8 +50,7 @@ dbconnect.once('open', function() {
     console.log("Mongoose connection successful.");
 });
 
-require("./scripts/scrape.js")(app);
-require("./routes/htmlRoutes.js")(app);
+
 
 
 // Start the API server

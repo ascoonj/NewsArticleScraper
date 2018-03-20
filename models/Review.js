@@ -19,10 +19,10 @@ var ReviewSchema = new Schema({
   // `comment` is an object that stores comment ids
   // The ref property links the ObjectId to the Comment model
   // This allows us to populate the Reviews with an associated Comment
-  comment: {
+  comment: [{
     type: Schema.Types.ObjectId,
     ref: "Comment"
-  }
+  }]
 }, {
     timestamps: true
 });
