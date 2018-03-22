@@ -11,7 +11,7 @@ $(".reviewHolder").on("click", ".add-comment", function(event){
     
     $("#commentsHolder").empty();
 
-   $("#save-comment").attr("data-id", reviewId);
+    $("#save-comment").attr("data-id", reviewId);
    console.log("comment button "+ $("#save-comment").attr("data-id"));
 
     //and get comments corresponding to the clicked review
@@ -49,16 +49,16 @@ $("#save-comment").on("click", function(event){
     console.log("comment being added: ", newComment);
 
     $.post("/comment", newComment, function(results){
-        console.log(results);
-        console.log("successfully added comment to database");
+        console.log("results of the new comment post:" + results);
+        //console.log("successfully added comment to database");
 
         let html = "<div class = 'card commentCard'>";
         html += "<div class='card-header'>";
         html += newComment.commenter;
         html += "</div><div class='card-body'><p>";
         html += newComment.body;
-        html += "</p>";
-        html += "<button type='submit' class='btn btn-danger btn-sm delete-comment'>";
+        html += "</p><button data-id =" + results[0]._id;
+        html += "type='submit' class='btn btn-danger btn-sm delete-comment'>";
         html += "Delete</button></div></div>";
 
         $("#commentsHolder").prepend(html);
@@ -67,5 +67,15 @@ $("#save-comment").on("click", function(event){
 
     $("#commenter").val("");
     $("#comment-body").val("");
+
+});
+
+$("#commentsHolder").on("click", ".delete-comment", function(event){
+    event.preventDefault();
+    var commentId = $(this).attr("data-id");
+    console.log("the comment's id is: ", commentId);
+    $.post("/deleteComment/" + commentId, function(results) {
+        console.log("comment deleted");
+    });
 
 });
