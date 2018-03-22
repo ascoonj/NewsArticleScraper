@@ -29,7 +29,7 @@ $(".reviewHolder").on("click", ".add-comment", function(event){
             html += element.body;
             html += "</p>";
             html += "<button data-id =" + element._id;
-            html += "type='submit' class='btn btn-danger btn-sm delete-comment'>";
+            html += " type='submit' class='btn btn-danger btn-sm delete-comment'>";
             html += "Delete</button></div></div>";
 
             $("#commentsHolder").prepend(html);
@@ -57,8 +57,8 @@ $("#save-comment").on("click", function(event){
         html += newComment.commenter;
         html += "</div><div class='card-body'><p>";
         html += newComment.body;
-        html += "</p><button data-id =" + results[0]._id;
-        html += "type='submit' class='btn btn-danger btn-sm delete-comment'>";
+        html += "</p><button data-id =" + newComment._id;
+        html += " type='submit' class='btn btn-danger btn-sm delete-comment'>";
         html += "Delete</button></div></div>";
 
         $("#commentsHolder").prepend(html);
@@ -76,6 +76,8 @@ $("#commentsHolder").on("click", ".delete-comment", function(event){
     console.log("the comment's id is: ", commentId);
     $.post("/deleteComment/" + commentId, function(results) {
         console.log("comment deleted");
+        
     });
+    $(this).parent().parent().hide();
 
 });

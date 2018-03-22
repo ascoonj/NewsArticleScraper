@@ -71,7 +71,7 @@ module.exports = function(app) {
     
 
     app.post("/deleteComment/:id", function(req, res) {
-        console.log(request.params.id);
+        console.log(req.params.id);
         
         db.Comment.findByIdAndRemove({_id: req.params.id}, function(error) {
             if (error) console.log('Comment could not be deleted', error);
