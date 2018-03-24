@@ -49,7 +49,7 @@ $("#save-comment").on("click", function(event){
     console.log("comment being added: ", newComment);
 
     $.post("/comment", newComment, function(results){
-        console.log("results of the new comment post:" + results);
+        console.log("results: ", results);
         //console.log("successfully added comment to database");
 
         let html = "<div class = 'card commentCard'>";
@@ -57,7 +57,7 @@ $("#save-comment").on("click", function(event){
         html += newComment.commenter;
         html += "</div><div class='card-body'><p>";
         html += newComment.body;
-        html += "</p><button data-id =" + newComment._id;
+        html += "</p><button data-id =" + results._id;
         html += " type='submit' class='btn btn-danger btn-sm delete-comment'>";
         html += "Delete</button></div></div>";
 

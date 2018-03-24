@@ -14,7 +14,7 @@ module.exports = function(app) {
 				return console.error(err);
 			}
             res.render("index", {data:data});
-            console.log(data);
+            // console.log(data);
         });
     });
 
@@ -47,27 +47,47 @@ module.exports = function(app) {
     });
 
    
-    app.post("/comment", function(req, res){
-        var newComment = new db.Comment(req.body);
-        console.log("New comment: ", newComment);
-        console.log("req.body: ", req.body)
-        db.Comment.create(newComment)
-        .then(function(dbComment) {
-            return db.Review.findOneAndUpdate(
-                {_id: newComment.review},
-                {$push: {comment: dbComment._id}},
-                {new: true});
-            })
-            .then(function(dbReview){
-                res.json(dbReview);
-            })
-            .catch(function(err){
+    // app.post("/comment", function(req, res){
+    //     // var newComment = new db.Comment(req.body);
+    //     // console.log("New comment: ", newComment);
+    //     // console.log("req.body: ", req.body)
+    //     db.Comment.create(newComment)
+    //     .then(function(dbComment) {
+    //         db.Review.findOneAndUpdate(
+    //             {_id: newComment.review},
+    //             {$push: {comment: dbComment._id}},
+    //             {new: true});
+    //             console.log("sthg happening here");
+    //         })
+    //         .then(function(dbComment){
+    //             res.json(dbComment);
+    //             console.log("most recently added comment ", dbComment);
+    //         })
+    //         .catch(function(err){
                     
-                    res.json(err);
-            }
-        );
-    });
+    //                 res.json(err);
+    //         }
+    //     );
+    // });
 
+
+    app.post("/comment", function(req, res){
+        console.log("this line is running ", req.body);
+        db.Comment.create(req.body)
+			.then(function(dbComment) {
+            	db.Review.findOneAndUpdate(
+					{_id: req.body.review },
+					{$push: {comment: dbComment._id}},
+					{new: true}
+				).then(function(dbReview){
+                    console.log("most recently added comment ", dbComment);
+                    console.log(dbReview);
+                    res.json(dbComment);
+            	}).catch(function(err){
+                    res.json(err);
+            	});
+		});
+    });
     
 
     app.post("/deleteComment/:id", function(req, res) {

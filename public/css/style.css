@@ -15,8 +15,8 @@ p {
 
 .jumbotron {
     margin: 0;
-    opacity: 0.4;
-    background: url("../images/bookbkgd1.jpg");
+    /* opacity: 0.4; */
+    /* background: url("../images/bookbkgd1.jpg"); */
     height: 100%;
     width: 100%;
     background-size: cover;
@@ -42,7 +42,7 @@ form {
 .reviewCard {
     overflow: hidden;
    /* white-space: nowrap; */
-   text-overflow: ellipsis;
+   /* text-overflow: ellipsis; */
    height: 465px;
    margin-bottom: 20px;
 }
@@ -72,10 +72,16 @@ form {
     min-height: 145px;
     padding: 10px;
     margin-bottom: 10px;
-    /* height: 630px;
-    width: 368px; */
+    /* height: 650px; */
+    /* width: 368px; */
 }
 
 .hidden {
     display: none;
+}
+
+.card-text {
+    overflow: hidden;
+    height: 95px;
+    /* text-overflow: ellipsis; */
 }
